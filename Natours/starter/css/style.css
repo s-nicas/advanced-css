@@ -135,6 +135,20 @@ body {
   }
 }
 
+@keyframes moveInBottom {
+  /* what do we want the element to look like or behave when it starts */
+  0% {
+      opacity: 0;
+      /* start on the bottom and move up */
+      transform: translateY(30px);
+  }
+  /* when it's fully loaded */
+  100% {
+      opacity: 1;
+      transform: translate(0);
+  }
+}
+
 /* pseudo class: state in which an element is in */
 /* visited state should look the same as un-visited link */
 .btn:link,
@@ -146,8 +160,7 @@ body {
   display: inline-block;
   /* to shape it round you can just add a high radius - it will always be the same */
   border-radius: 100px;
-  /* transition on all the properties for 2s */
-  transition: all .2s;
+  position: relative;
 }
 
 .btn-white {
@@ -165,4 +178,35 @@ body {
 .btn:active {
   transform: translateY(-1px);
   box-shadow: 0 5px 10px rgba(0,0,0,.2);
+}
+/* pseudo elements - adds a virtual element after the element we are selecting */
+/* have to always specifiy the content & display property */
+/* pseudo elements are like child of initial elements */
+.btn::after {
+  content: "";
+  display: inline-block;
+  height: 100%;
+  width: 100%;
+  border-radius: 100px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  transition: all .4s;
+}
+
+.btn-white::after {
+  background-color: #fff;
+}
+
+.btn:hover::after {
+  transform: scaleX(1.4) scaleY(1.6);
+  /* fade out */
+  opacity: 0;
+}
+
+.btn-animated {
+  animation: moveInBottom .5s ease-out;
+  /* applies the zero percent on load */
+  animation-fill-mode: backwards;
 }
