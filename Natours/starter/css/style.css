@@ -6,3 +6,129 @@ Medium green: #55c57a
 Dark green: #28b485
 
 */
+
+/* universal selector resets what other browsers may apply by default so website looks the same across borders */
+* {
+  margin: 0;
+  padding: 0;
+  /* The box-sizing property allows us to include the padding and border in an element's total width and height. */
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Lato", sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.7;
+  color: #777;
+  padding: 30px;
+}
+
+.header {
+  height: 95vh;
+  /* can place two background images sperated with coma. The first one will sit on top - second one will sit on bottom */
+  /* linear gradient - transitions from a color to the other from left to right bottom corner*/
+  /* The linear-gradient() CSS function creates an image consisting of a progressive transition between two or more colors along a straight line. Its result is an object of the */
+  background-image: linear-gradient(
+      to right bottom,
+      rgba(126, 213, 111, 0.8),
+      rgba(40, 180, 131, 0.8) ),
+  url(../img/hero.jpg);
+  /* will try to fix photo into our specified with and height */
+  background-size: cover;
+  background-position: top;
+  clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%);
+  /* parent element to logo box needs to have position of relative so logo box can have a starting position and position absolute will work. Position relative serves as a reference */
+  position: relative;
+}
+
+.logo-box {
+  position: absolute;
+  top: 40px;
+  left: 40px;
+}
+
+.logo {
+  height: 35px;
+}
+
+.text-box{
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  /* shifts 50% of elements height and width over so top 50% now is the center of the element and not hte start of it */
+  transform: translate(-50%, -50%)
+}
+
+.heading-primary {
+  color: #ffffff;
+  text-transform: uppercase;
+  /* avoid animations from shaking */
+  backface-visibility: hidden;
+}
+
+.heading-primary-main {
+  /* span nautrally is inline element - display block makes them happen on new line and take up the width of parent element */
+  display: block;
+  font-size: 60px;
+  font-weight: 400;
+  letter-spacing: 35px;
+  /* to get it to work minimum of these two properties needed. The name and the duration */
+  animation-name: moveInLeft;
+  animation-duration: 1s;
+  animation-timing-function: ease-out;
+
+  /* adds a delay to when animation starts */
+  /* animation-delay: 3s; */
+  /* following will repeat the animation by however many counts */
+  /* animation-iteration-count: 3 */
+  /* important one below - how an animation should proceed. EX ease in, ease out, etch*/
+  /* animation-timing-function: ease-out*/
+}
+
+.heading-primary-sub {
+  display: block;
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: 17.4px;
+  animation: moveInRight 1s ease-out;
+}
+
+/* important for performace it's best to only animate two different properties - opactity and transform */
+@keyframes moveInLeft {
+  /* what do we want the element to look like or behave when it starts */
+  0% {
+      opacity: 0;
+      /* start on the left move 100px to left */
+      transform: translateX(-100px);
+  }
+
+  80% {
+      /* move 20 px to the right */
+      transform: translateX(10px)
+  }
+  /* when it's fully loaded */
+  100% {
+      opacity: 1;
+      transform: translate(0);
+  }
+}
+
+@keyframes moveInRight {
+  /* what do we want the element to look like or behave when it starts */
+  0% {
+      opacity: 0;
+      /* start on the left move 100px to left */
+      transform: translateX(100px);
+  }
+
+  80% {
+      /* move 20 px to the right */
+      transform: translateX(-10px)
+  }
+  /* when it's fully loaded */
+  100% {
+      opacity: 1;
+      transform: translate(0);
+  }
+}
